@@ -76,7 +76,8 @@ if [ ! -d "/home/$user/public_html" ]
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/ad-inserter/ad-inserter.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/simple-301-redirects-addon-bulk-uploader/simple-301-bulk-uploader.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/rich-reviews"
-			find /home/$user/public_html -iwholename "*/wp-content/plugins/give/give.php" -exec grep -H "Version: " {} \;	
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/give/give.php" -exec grep -H "Version: " {} \;
+			find /home/$user/public_html -iwholename "*/wp-content/themes/bridge"	
 			echo -e "\033[0m"
 	fi
 		echo -e "\e[1m Real owner: \e[0m"
