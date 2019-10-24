@@ -36,32 +36,24 @@ if [ ! -d "/home/$user/public_html" ]
 	if [[ -n $(find . -type f -iwholename "*/modules/system/system.info") ]]
         	then
 			
-#			if [[ "$d" > "$(find /home/$user/public_html -iwholename "*/modules/system/system.info" -exec grep -H "Version: " {} \;)" ]]
-#				then
 					echo -n "Current Drupal version is: "
                			 	echo "${d}"
 		                	for i in 226 227 228 229 230 231; do echo -en "\e[38;5;${i}m=============\e[0m"; done; echo
 		                	find -type f -iwholename "*/modules/system/system.info" -exec grep -H "version = \"" {} \;|grep -v "7.67"
 		                	for i in 226 227 228 229 230 231; do echo -en "\e[38;5;${i}m=============\e[0m"; done; echo
-#			fi
 	fi
 
 	if [[ -n $(find . -type f -iwholename "*/administrator/manifests/files/joomla.xml") ]]
         	then
-#			if [ "$j" > "$(find . -type f -iwholename "*/administrator/manifests/files/joomla.xml")" ]
-#                                then
 					echo -n "Current Joomla version is: "
 					echo "${j}"
 		                	for i in 21 20 19 18 17 16; do echo -en "\e[38;5;${i}m=============\e[0m"; done; echo
 		                	find -iwholename "*/administrator/manifests/files/joomla.xml" -exec grep -H 'version>.\..\..<\/' {} \;|grep -v "3.9.12"
 		                	for i in 21 20 19 18 17 16; do echo -en "\e[38;5;${i}m=============\e[0m"; done; echo
-#			fi
 	fi
 
 	if [[ -n $(find . -type f -iwholename "*/wp-includes/version.php") ]]
 		then
-#			if [ "$w" > "$(find . -type f -iwholename "*/wp-includes/version.php")" ]
-#                               then
 					echo -n "Current WordPress version is: "
 					echo "${w}"
 		                	for i in 52 53 54 55 56 57; do echo -en "\e[38;5;${i}m=============\e[0m"; done; echo
@@ -98,9 +90,9 @@ if [ ! -d "/home/$user/public_html" ]
                         echo -e "\033[94m"
                         grep -Rl 'wp_vcd' /home/$user/public_html/ | grep 'themes'
 
-			
-			echo -e "\033[0m"
-#			fi
+						
+	
+		echo -e "\033[0m"
 	fi
 		echo -e "\e[1m Real owner: \e[0m"
                 less /etc/trueuserowners |grep $user
