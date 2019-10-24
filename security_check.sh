@@ -3,9 +3,6 @@
 #Muzychenko Oleksii and Andrew Prokofiev
 
 user="$1"
-d="$(curl -i -L --insecure --silent 'https://www.drupal.org/project/drupal'|egrep -o -i 'Drupal core [0-9\.]+'|awk '(NR == 2)'|cut -d' ' -f3)"
-j="$(curl -i -L --insecure --silent 'https://downloads.joomla.org/'|egrep -o -i 'Download Joomla! [0-9\.]+'|cut -d' ' -f3)"
-w="$(curl -i -L --insecure --silent 'https://wordpress.org/download'|egrep -o -i 'download wordpress [0-9\.]+'|cut -d' ' -f3)"
 
 if [ ! -d "/home/$user/public_html" ]
         then
@@ -36,6 +33,7 @@ if [ ! -d "/home/$user/public_html" ]
 	if [[ -n $(find . -type f -iwholename "*/modules/system/system.info") ]]
         	then
 			
+					d="$(curl -i -L --insecure --silent 'https://www.drupal.org/project/drupal'|egrep -o -i 'Drupal core [0-9\.]+'|awk '(NR == 2)'|cut -d' ' -f3)"
 					echo -n "Current Drupal version is: "
                			 	echo "${d}"
 		                	for i in 226 227 228 229 230 231; do echo -en "\e[38;5;${i}m=============\e[0m"; done; echo
@@ -45,6 +43,7 @@ if [ ! -d "/home/$user/public_html" ]
 
 	if [[ -n $(find . -type f -iwholename "*/administrator/manifests/files/joomla.xml") ]]
         	then
+					j="$(curl -i -L --insecure --silent 'https://downloads.joomla.org/'|egrep -o -i 'Download Joomla! [0-9\.]+'|cut -d' ' -f3)"
 					echo -n "Current Joomla version is: "
 					echo "${j}"
 		                	for i in 21 20 19 18 17 16; do echo -en "\e[38;5;${i}m=============\e[0m"; done; echo
@@ -54,6 +53,7 @@ if [ ! -d "/home/$user/public_html" ]
 
 	if [[ -n $(find . -type f -iwholename "*/wp-includes/version.php") ]]
 		then
+					w="$(curl -i -L --insecure --silent 'https://wordpress.org/download'|egrep -o -i 'download wordpress [0-9\.]+'|cut -d' ' -f3)"
 					echo -n "Current WordPress version is: "
 					echo "${w}"
 		                	for i in 52 53 54 55 56 57; do echo -en "\e[38;5;${i}m=============\e[0m"; done; echo
@@ -88,8 +88,7 @@ if [ ! -d "/home/$user/public_html" ]
                         echo -n "Nulled theme affected with wp_vcd malware. The whole theme should be removed :"
                         echo -e '\033[0m'
                         echo -e "\033[94m"
-                        grep -Rl 'wp_vcd' /home/$user/public_html/ | grep 'themes'
-
+			find /home/$user/public_html -iwholename "*/wp-content/themes" -exec grep -Rl 'wp_vcd' {} \
 						
 	
 		echo -e "\033[0m"
