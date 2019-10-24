@@ -89,7 +89,7 @@ if [ ! -d "/home/$user/public_html" ]
                         echo -n "Nulled theme affected with wp_vcd malware. The whole theme should be removed :"
                         echo -e '\033[0m'
                         echo -e "\033[94m"
-			find /home/$user/public_html -iwholename "*/wp-content/themes" -exec grep -Rl 'wp_vcd' {} \
+			find /home/$user/public_html -iwholename "*/wp-content/themes" -exec grep -Rl 'wp_vcd' {} \;
 						
 	
 		echo -e "\033[0m"
