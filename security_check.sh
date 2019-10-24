@@ -1,6 +1,6 @@
 #!/bin/bash
 #test version v 0.3
-#Muzychenko Oleksii and Andrew Prokifiev
+#Muzychenko Oleksii and Andrew Prokofiev
 
 user="$1"
 
@@ -79,6 +79,14 @@ if [ ! -d "/home/$user/public_html" ]
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/give/give.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/themes/bridge"	
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/syntaxhighlighter/syntaxhighlighter.php" -exec grep -H "Version: " {} \;
+			
+			echo -e '\033[1m'
+                        echo -n "Nulled theme affected with wp_vcd malware. The whole theme should be removed :"
+                        echo -e '\033[0m'
+                        echo -e "\033[94m"
+                        grep -Rl 'wp_vcd' /home/$user/public_html/ | grep 'themes'
+
+			
 			echo -e "\033[0m"
 	fi
 		echo -e "\e[1m Real owner: \e[0m"
