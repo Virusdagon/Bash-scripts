@@ -1,13 +1,13 @@
 #!/bin/bash
-#test version v 0.3
-#Muzychenko Oleksii and Andrew Prokifiev
+#test version v 0.5
+#Muzychenko Oleksii and Andrew Prokofiev
 
 user="$1"
 
 if [ ! -d "/home/$user/public_html" ]
         then
                 echo -e '\033[36m'
-                echo 'No such user here!'
+                echo 'No such user or public_html folder here!'
                 echo -e '\033[0m'
         else
                 cd /home/$user/public_html
@@ -32,29 +32,33 @@ if [ ! -d "/home/$user/public_html" ]
 
 	if [[ -n $(find . -type f -iwholename "*/modules/system/system.info") ]]
         	then
-			echo -n "Current Drupal version is: "
-                	curl -i -L --insecure --silent 'https://www.drupal.org/project/drupal'|egrep -o -i 'Drupal core [0-9\.]+'|awk '(NR == 2)'|cut -d' ' -f3
-                	for i in 226 227 228 229 230 231; do echo -en "\e[38;5;${i}m=============\e[0m"; done; echo
-                	find -type f -iwholename "*/modules/system/system.info" -exec grep -H "version = \"" {} \;
-                	for i in 226 227 228 229 230 231; do echo -en "\e[38;5;${i}m=============\e[0m"; done; echo
+			
+					d="$(curl -i -L --insecure --silent 'https://www.drupal.org/project/drupal'|egrep -o -i 'Drupal core [0-9\.]+'|awk '(NR == 2)'|cut -d' ' -f3)"
+					echo -n "Current Drupal version is: "
+               			 	echo "${d}"
+		                	for i in 226 227 228 229 230 231; do echo -en "\e[38;5;${i}m=============\e[0m"; done; echo
+		                	find -type f -iwholename "*/modules/system/system.info" -exec grep -H "version = \"" {} \;|grep -v "7.67"
+		                	for i in 226 227 228 229 230 231; do echo -en "\e[38;5;${i}m=============\e[0m"; done; echo
 	fi
 
 	if [[ -n $(find . -type f -iwholename "*/administrator/manifests/files/joomla.xml") ]]
         	then
-			echo -n "Current Joomla version is: "
-                	curl -i -L --insecure --silent 'https://downloads.joomla.org/'|egrep -o -i 'Download Joomla! [0-9\.]+'|cut -d' ' -f3
-                	for i in 21 20 19 18 17 16; do echo -en "\e[38;5;${i}m=============\e[0m"; done; echo
-                	find -iwholename "*/administrator/manifests/files/joomla.xml" -exec grep -H 'version>.\..\..<\/' {} \;
-                	for i in 21 20 19 18 17 16; do echo -en "\e[38;5;${i}m=============\e[0m"; done; echo
+					j="$(curl -i -L --insecure --silent 'https://downloads.joomla.org/'|egrep -o -i 'Download Joomla! [0-9\.]+'|cut -d' ' -f3)"
+					echo -n "Current Joomla version is: "
+					echo "${j}"
+		                	for i in 21 20 19 18 17 16; do echo -en "\e[38;5;${i}m=============\e[0m"; done; echo
+		                	find -iwholename "*/administrator/manifests/files/joomla.xml" -exec grep -H 'version>.\..\..<\/' {} \;|grep -v "3.9.12"
+		                	for i in 21 20 19 18 17 16; do echo -en "\e[38;5;${i}m=============\e[0m"; done; echo
 	fi
 
 	if [[ -n $(find . -type f -iwholename "*/wp-includes/version.php") ]]
 		then
-			echo -n "Current WordPress version is: "
-                	curl -i -L --insecure --silent 'https://wordpress.org/download'|egrep -o -i 'download wordpress [0-9\.]+'|cut -d' ' -f3
-                	for i in 52 53 54 55 56 57; do echo -en "\e[38;5;${i}m=============\e[0m"; done; echo
-                	find . -type f -iwholename "*/wp-includes/version.php" -exec grep -H "\$wp_version =" {} \;
-                	for i in 52 53 54 55 56 57; do echo -en "\e[38;5;${i}m=============\e[0m"; done; echo
+					w="$(curl -i -L --insecure --silent 'https://wordpress.org/download'|egrep -o -i 'download wordpress [0-9\.]+'|cut -d' ' -f3)"
+					echo -n "Current WordPress version is: "
+					echo "${w}"
+		                	for i in 52 53 54 55 56 57; do echo -en "\e[38;5;${i}m=============\e[0m"; done; echo
+		                	find . -type f -iwholename "*/wp-includes/version.php" -exec grep -H "\$wp_version =" {} \;|grep -v "5.2.4"
+		                	for i in 52 53 54 55 56 57; do echo -en "\e[38;5;${i}m=============\e[0m"; done; echo
 
                         echo -e '\033[1m'		
 			echo -n "Known vulerable plugins. Please check the IKB article and verify the versions:"
@@ -76,8 +80,19 @@ if [ ! -d "/home/$user/public_html" ]
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/ad-inserter/ad-inserter.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/simple-301-redirects-addon-bulk-uploader/simple-301-bulk-uploader.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/rich-reviews"
-			find /home/$user/public_html -iwholename "*/wp-content/plugins/give/give.php" -exec grep -H "Version: " {} \;	
-			echo -e "\033[0m"
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/give/give.php" -exec grep -H "Version: " {} \;
+			find /home/$user/public_html -iwholename "*/wp-content/themes/bridge"	
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/syntaxhighlighter/syntaxhighlighter.php" -exec grep -H "Version: " {} \;
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/duplicate-page/duplicatepage.php" -exec grep -H "Version: " {} \;			
+			
+			echo -e '\033[1m'
+                        echo -n "Nulled theme affected with wp_vcd malware. The whole theme should be removed :"
+                        echo -e '\033[0m'
+                        echo -e "\033[94m"
+			find /home/$user/public_html -iwholename "*/wp-content/themes" -exec grep -Rl 'wp_vcd' {} \;
+						
+	
+		echo -e "\033[0m"
 	fi
 		echo -e "\e[1m Real owner: \e[0m"
                 less /etc/trueuserowners |grep $user
@@ -89,3 +104,4 @@ if [ ! -d "/home/$user/public_html" ]
                 /scripts/accstatus $user
 
 fi
+
