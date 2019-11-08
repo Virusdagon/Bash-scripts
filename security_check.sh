@@ -48,11 +48,7 @@ if [ ! -d "/home/$user/public_html" ]
                                         echo -n "Current Drupal 8 version is: "
                                         echo "${drupal8}"
                                         for i in 196 160 124 88 52 16; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
-<<<<<<< HEAD
                                         find -type f -iwholename "*/core/lib/Drupal.php" -exec grep -H "const VERSION =" {} \;|grep -v "8.7.9"
-=======
-                                        find -type f -iwholename "*/core/lib/Drupal.php" -exec grep -H "const VERSION =" {} \;|grep -v "8.7.8"
->>>>>>> efadec1a7f0afad06d815526e2cec8b7350c8756
                                         for i in 196 160 124 88 52 16; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
         fi
 
@@ -62,11 +58,7 @@ if [ ! -d "/home/$user/public_html" ]
 					echo -n "Current Joomla version is: "
 					echo "${joomla}"
 		                	for i in 21 20 19 18 17 16; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
-<<<<<<< HEAD
 		                	find -iwholename "*/administrator/manifests/files/joomla.xml" -exec grep -H 'version>.\..\..<\/' {} \;|grep -v "3.9.13"
-=======
-		                	find -iwholename "*/administrator/manifests/files/joomla.xml" -exec grep -H 'version>.\..\..<\/' {} \;|grep -v "3.9.12"
->>>>>>> efadec1a7f0afad06d815526e2cec8b7350c8756
 		                	for i in 21 20 19 18 17 16; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
 	fi
 
