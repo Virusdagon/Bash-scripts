@@ -1,6 +1,6 @@
 #!/bin/bash
-#test version v 0.6
-#Muzychenko Oleksii and Andrew Prokofiev
+#Version 0.7.1
+#Oleksii Muzychenko and Andrew Prokofiev
 
 user="$1"
 
@@ -48,7 +48,7 @@ if [ ! -d "/home/$user/public_html" ]
                                         echo -n "Current Drupal 8 version is: "
                                         echo "${drupal8}"
                                         for i in 196 160 124 88 52 16; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
-                                        find -type f -iwholename "*/core/lib/Drupal.php" -exec grep -H "const VERSION =" {} \;|grep -v "8.7.9"
+                                        find -type f -iwholename "*/core/lib/Drupal.php" -exec grep -H "const VERSION =" {} \;|grep -vi -e 'tmp' -e 'OLD' -e 'Old' -e 'old' -e 'oldsite' -e 'Backup' -e 'BACKUP' -e 'backup' -e 'Backups' -e 'BACKUPS' -e 'backups' -e 'dev' -e 'DEV' -e 'bkp' -e 'archive' -e 'Archive' -e 'ARCHIVE' -e 'arch' -e 'Arch'|grep -v "8.7.9"
                                         for i in 196 160 124 88 52 16; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
         fi
 
@@ -58,7 +58,7 @@ if [ ! -d "/home/$user/public_html" ]
 					echo -n "Current Joomla version is: "
 					echo "${joomla}"
 		                	for i in 21 20 19 18 17 16; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
-		                	find -iwholename "*/administrator/manifests/files/joomla.xml" -exec grep -H 'version>.\..\..<\/' {} \;|grep -v "3.9.13"
+		                	find -iwholename "*/administrator/manifests/files/joomla.xml" -exec grep -H 'version>.\..\..<\/' {} \;|grep -vi -e 'tmp' -e 'OLD' -e 'Old' -e 'old' -e 'oldsite' -e 'Backup' -e 'BACKUP' -e 'backup' -e 'Backups' -e 'BACKUPS' -e 'backups' -e 'dev' -e 'DEV' -e 'bkp' -e 'archive' -e 'Archive' -e 'ARCHIVE' -e 'arch' -e 'Arch'|grep -v "3.9.13"
 		                	for i in 21 20 19 18 17 16; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
 	fi
 
@@ -68,7 +68,7 @@ if [ ! -d "/home/$user/public_html" ]
 					echo -n "Current WordPress version is: "
 					echo "${wordpress}"
 		                	for i in 52 53 54 55 56 57; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
-		                	find . -type f -iwholename "*/wp-includes/version.php" -exec grep -H "\$wp_version =" {} \;|grep -v "5.2.4"
+		                	find . -type f -iwholename "*/wp-includes/version.php" -exec grep -H "\$wp_version =" {} \;|grep -vi -e 'tmp' -e 'OLD' -e 'Old' -e 'old' -e 'oldsite' -e 'Backup' -e 'BACKUP' -e 'backup' -e 'Backups' -e 'BACKUPS' -e 'backups' -e 'dev' -e 'DEV' -e 'bkp' -e 'archive' -e 'Archive' -e 'ARCHIVE' -e 'arch' -e 'Arch'|grep -v "5.3"
 		                	for i in 52 53 54 55 56 57; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
 
                         echo -e '\033[1m'		
@@ -102,8 +102,8 @@ if [ ! -d "/home/$user/public_html" ]
                         echo -e "\033[94m"
 			find /home/$user/public_html -iwholename "*/wp-content/themes" -exec grep -Rl 'wp_vcd' {} \;
 						
+			echo -e "\033[0m"
 	
-		echo -e "\033[0m"
 	fi
 		echo -e "\e[1m Real owner: \e[0m"
                 less /etc/trueuserowners |grep $user
