@@ -1,5 +1,5 @@
 #!/bin/bash
-#Version 0.7.1
+#Version 0.7.2
 #Oleksii Muzychenko and Andrew Prokofiev
 
 user="$1"
@@ -95,7 +95,8 @@ if [ ! -d "/home/$user/public_html" ]
 			find /home/$user/public_html -iwholename "*/wp-content/themes/bridge"	
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/syntaxhighlighter/syntaxhighlighter.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/duplicate-page/duplicatepage.php" -exec grep -H "Version: " {} \;			
-			
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/email-subscribers/email-subscribers.php" -exec grep -H "Version: " {} \;
+
 			echo -e '\033[1m'
                         echo -n "Nulled theme affected with wp_vcd malware. The whole theme should be removed :"
                         echo -e '\033[0m'
