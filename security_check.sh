@@ -1,5 +1,5 @@
 #!/bin/bash
-#Version 0.7.2
+#Version 0.7.3
 #Oleksii Muzychenko and Andrew Prokofiev
 
 user="$1"
@@ -48,7 +48,7 @@ if [ ! -d "/home/$user/public_html" ]
                                         echo -n "Current Drupal 8 version is: "
                                         echo "${drupal8}"
                                         for i in 196 160 124 88 52 16; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
-                                        find -type f -iwholename "*/core/lib/Drupal.php" -exec grep -H "const VERSION =" {} \;|grep -vi -e 'tmp' -e 'OLD' -e 'Old' -e 'old' -e 'oldsite' -e 'Backup' -e 'BACKUP' -e 'backup' -e 'Backups' -e 'BACKUPS' -e 'backups' -e 'dev' -e 'DEV' -e 'bkp' -e 'archive' -e 'Archive' -e 'ARCHIVE' -e 'arch' -e 'Arch'|grep -v "8.7.9"
+                                        find -type f -iwholename "*/core/lib/Drupal.php" -exec grep -H "const VERSION =" {} \;|grep -vi -e 'tmp' -e 'OLD' -e 'Old' -e 'old' -e 'oldsite' -e 'Backup' -e 'BACKUP' -e 'backup' -e 'Backups' -e 'BACKUPS' -e 'backups' -e 'dev' -e 'DEV' -e 'bkp' -e 'archive' -e 'Archive' -e 'ARCHIVE' -e 'arch' -e 'Arch'|grep -v "8.7.10"
                                         for i in 196 160 124 88 52 16; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
         fi
 
@@ -75,27 +75,31 @@ if [ ! -d "/home/$user/public_html" ]
 			echo -n "Known vulerable plugins. Please check the IKB article and verify the versions:"
                         echo -e '\033[0m'
 			echo -e "\033[94m"
+
+#			Updates no available
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/duplicate-page/duplicatepage.php"
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/form-lightbox"
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/rich-reviews"
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/yuzo-related-post"
+#			Updates available
+#			find /home/$user/public_html -iwholename "*/wp-content/themes/bridge" -exec grep -H "Version: " {} \;
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/ad-inserter/ad-inserter.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/blog-designer/blog-designer.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/bold-page-builder/bold-builder.php" -exec grep -H "Version: " {} \;
-			find /home/$user/public_html -iwholename "*/wp-content/plugins/fb-messenger-live-chat/fb-messenger-live-chat.php" -exec grep -H "Version: " {} \;
-			find /home/$user/public_html -iwholename "*/wp-content/plugins/yuzo-related-post"
-			find /home/$user/public_html -iwholename "*/wp-content/plugins/yellow-pencil-visual-theme-customizer/yellow-pencil.php" -exec grep -H "Version: " {} \;
-			find /home/$user/public_html -iwholename "*/wp-content/plugins/wp-live-chat-support/wp-live-chat-support.php" -exec grep -H "Version: " {} \;
-			find /home/$user/public_html -iwholename "*/wp-content/plugins/form-lightbox"
-			find /home/$user/public_html -iwholename "*/wp-content/plugins/nd-booking"
-			find /home/$user/public_html -iwholename "*/wp-content/plugins/nd-learning"
-			find /home/$user/public_html -iwholename "*/wp-content/plugins/nd-travel"
-			find /home/$user/public_html -iwholename "*/wp-content/plugins/smart-google-code-inserter/smartgooglecode.php" -exec grep -H "Version: " {} \;
-			find /home/$user/public_html -iwholename "*/wp-content/plugins/wp-database-backup/wp-database-backup.php" -exec grep -H "Version: " {} \;
-			find /home/$user/public_html -iwholename "*/wp-content/plugins/slick-popup"
-			find /home/$user/public_html -iwholename "*/wp-content/plugins/ad-inserter/ad-inserter.php" -exec grep -H "Version: " {} \;
-			find /home/$user/public_html -iwholename "*/wp-content/plugins/simple-301-redirects-addon-bulk-uploader/simple-301-bulk-uploader.php" -exec grep -H "Version: " {} \;
-			find /home/$user/public_html -iwholename "*/wp-content/plugins/rich-reviews"
-			find /home/$user/public_html -iwholename "*/wp-content/plugins/give/give.php" -exec grep -H "Version: " {} \;
-			find /home/$user/public_html -iwholename "*/wp-content/themes/bridge"	
-			find /home/$user/public_html -iwholename "*/wp-content/plugins/syntaxhighlighter/syntaxhighlighter.php" -exec grep -H "Version: " {} \;
-			find /home/$user/public_html -iwholename "*/wp-content/plugins/duplicate-page/duplicatepage.php" -exec grep -H "Version: " {} \;			
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/email-subscribers/email-subscribers.php" -exec grep -H "Version: " {} \;
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/fb-messenger-live-chat/fb-messenger-live-chat.php" -exec grep -H "Version: " {} \;
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/give/give.php" -exec grep -H "Version: " {} \;
+#			find /home/$user/public_html -iwholename "*/wp-content/plugins/hybrid-composer" -exec grep -H "Version: " {} \;
+#			find /home/$user/public_html -iwholename "*/wp-content/plugins/nd-learning" -exec grep -H "Version: " {} \;
+#			find /home/$user/public_html -iwholename "*/wp-content/plugins/nd-booking" -exec grep -H "Version: " {} \;
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/nd-travel/nd-travel.php" -exec grep -H "Version: " {} \;
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/simple-301-redirects-addon-bulk-uploader/simple-301-bulk-uploader.php" -exec grep -H "Version: " {} \;
+#			find /home/$user/public_html -iwholename "*/wp-content/plugins/slick-popup" -exec grep -H "Version: " {} \;
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/smart-google-code-inserter/smartgooglecode.php" -exec grep -H "Version: " {} \;
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/syntaxhighlighter/syntaxhighlighter.php" -exec grep -H "Version: " {} \;
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/wp-database-backup/wp-database-backup.php" -exec grep -H "Version: " {} \;
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/wp-live-chat-support/wp-live-chat-support.php" -exec grep -H "Version: " {} \;
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/yellow-pencil-visual-theme-customizer/yellow-pencil.php" -exec grep -H "Version: " {} \;
 
 			echo -e '\033[1m'
                         echo -n "Nulled theme affected with wp_vcd malware. The whole theme should be removed :"
