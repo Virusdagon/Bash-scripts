@@ -1,5 +1,5 @@
 #!/bin/bash
-#Version 0.7.3
+#Version 0.7.4
 #Oleksii Muzychenko and Andrew Prokofiev
 
 user="$1"
@@ -34,10 +34,10 @@ if [ ! -d "/home/$user/public_html" ]
         	then
 			
 					drupal7="$(curl -i -L --insecure --silent 'https://www.drupal.org/project/drupal'|egrep -o -i 'Drupal core [0-9\.]+'|awk '(NR == 2)'|cut -d' ' -f3)"
-					echo -n "Current Drupal 7 version is: "
+					echo -n "Current Old Drupal version are 5.23, 6.38 and: "
                			 	echo "${drupal7}"
 		                	for i in 226 227 228 229 230 231; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
-		                	find -type f -iwholename "*/modules/system/system.info" -exec grep -H "version = \"" {} \;|grep -v "7.67"
+		                	find -type f -iwholename "*/modules/system/system.info" -exec grep -H "version = \"" {} \;|grep -vi "7.67" -e "5.23" -e "6.38"
 		                	for i in 226 227 228 229 230 231; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
 	fi
 
@@ -118,6 +118,21 @@ if [ ! -d "/home/$user/public_html" ]
                 less /etc/trueuserdomains |grep $user
 
 		echo -e '\e[1m Account status: \e[0m'
-                /scripts/accstatus $user
-
+#		Account status
+		if ls /var/cpanel/suspended/ |grep $user >/dev/null 2>&1
+			then
+				echo -e "$user - \e[38;5;9mSUSPENDED\e[0m"
+			else
+				domain=`grep " $user"$ /etc/trueuserdomains |cut -d ":" -f1`
+				hname=`less /usr/local/apache/conf/httpd.conf |grep $domain -2 |grep -v 127.0.0.1 |grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' |sort|uniq`
+				if /usr/local/bin/curl -s --resolve "$domain:80:$hname" http://$domain |egrep "403 Forbidden|403 Permission" >/dev/null 2>&1
+					then
+						echo -e "$user - \e[38;5;11mBLOCKED by .htaccess\e[0m"
+						elif /usr/local/bin/curl -s --resolve "$domain:80:$hname" https://$domain |egrep "403 Forbidden|403 Permission" >/dev/null 2>&1
+					then
+						echo -e "$user - \e[38;5;11mBLOCKED by .htaccess\e[0m"
+					else
+						echo -e "$user - \e[38;5;10mONLINE\e[0m"
+				fi
+		fi
 fi
