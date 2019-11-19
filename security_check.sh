@@ -48,7 +48,7 @@ if [ ! -d "/home/$user/public_html" ]
                                         echo -n "Current Drupal 8 version is: "
                                         echo "${drupal8}"
                                         for i in 196 160 124 88 52 16; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
-                                        find -type f -iwholename "*/core/lib/Drupal.php" -exec grep -H "const VERSION =" {} \;|grep -vi -e 'tmp' -e 'OLD' -e 'Old' -e 'old' -e 'oldsite' -e 'Backup' -e 'BACKUP' -e 'backup' -e 'Backups' -e 'BACKUPS' -e 'backups' -e 'dev' -e 'DEV' -e 'bkp' -e 'archive' -e 'Archive' -e 'ARCHIVE' -e 'arch' -e 'Arch'|grep -v "8.7.10"
+                                        find -type f -iwholename "*/core/lib/Drupal.php" -exec grep -H "const VERSION =" {} \;|grep -v "8.7.10"
                                         for i in 196 160 124 88 52 16; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
         fi
 
@@ -58,7 +58,7 @@ if [ ! -d "/home/$user/public_html" ]
 					echo -n "Current Joomla version is: "
 					echo "${joomla}"
 		                	for i in 21 20 19 18 17 16; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
-		                	find -iwholename "*/administrator/manifests/files/joomla.xml" -exec grep -H 'version>.\..\..<\/' {} \;|grep -vi -e 'tmp' -e 'OLD' -e 'Old' -e 'old' -e 'oldsite' -e 'Backup' -e 'BACKUP' -e 'backup' -e 'Backups' -e 'BACKUPS' -e 'backups' -e 'dev' -e 'DEV' -e 'bkp' -e 'archive' -e 'Archive' -e 'ARCHIVE' -e 'arch' -e 'Arch'|grep -v "3.9.13"
+		                	find -iwholename "*/administrator/manifests/files/joomla.xml" -exec grep -H 'version>.\..\..<\/' {} \;|grep -v "3.9.13"
 		                	for i in 21 20 19 18 17 16; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
 	fi
 
@@ -68,7 +68,7 @@ if [ ! -d "/home/$user/public_html" ]
 					echo -n "Current WordPress version is: "
 					echo "${wordpress}"
 		                	for i in 52 53 54 55 56 57; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
-		                	find . -type f -iwholename "*/wp-includes/version.php" -exec grep -H "\$wp_version =" {} \;|grep -vi -e 'tmp' -e 'OLD' -e 'Old' -e 'old' -e 'oldsite' -e 'Backup' -e 'BACKUP' -e 'backup' -e 'Backups' -e 'BACKUPS' -e 'backups' -e 'dev' -e 'DEV' -e 'bkp' -e 'archive' -e 'Archive' -e 'ARCHIVE' -e 'arch' -e 'Arch'|grep -v "5.3"
+		                	find . -type f -iwholename "*/wp-includes/version.php" -exec grep -H "\$wp_version =" {} \;|grep -v "5.3"
 		                	for i in 52 53 54 55 56 57; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
 
                         echo -e '\033[1m'		
@@ -77,24 +77,25 @@ if [ ! -d "/home/$user/public_html" ]
 			echo -e "\033[94m"
 
 #			Updates no available
-			find /home/$user/public_html -iwholename "*/wp-content/plugins/duplicate-page/duplicatepage.php"
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/duplicate-page"
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/form-lightbox"
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/rich-reviews"
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/yuzo-related-post"
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/slick-popup"
+
 #			Updates available
-#			find /home/$user/public_html -iwholename "*/wp-content/themes/bridge" -exec grep -H "Version: " {} \;
+			find /home/$user/public_html -iwholename "*/wp-content/themes/bridge"
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/ad-inserter/ad-inserter.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/blog-designer/blog-designer.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/bold-page-builder/bold-builder.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/email-subscribers/email-subscribers.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/fb-messenger-live-chat/fb-messenger-live-chat.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/give/give.php" -exec grep -H "Version: " {} \;
-#			find /home/$user/public_html -iwholename "*/wp-content/plugins/hybrid-composer" -exec grep -H "Version: " {} \;
-#			find /home/$user/public_html -iwholename "*/wp-content/plugins/nd-learning" -exec grep -H "Version: " {} \;
-#			find /home/$user/public_html -iwholename "*/wp-content/plugins/nd-booking" -exec grep -H "Version: " {} \;
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/hybrid-composer"
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/nd-learning"
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/nd-booking"
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/nd-travel/nd-travel.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/simple-301-redirects-addon-bulk-uploader/simple-301-bulk-uploader.php" -exec grep -H "Version: " {} \;
-#			find /home/$user/public_html -iwholename "*/wp-content/plugins/slick-popup" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/smart-google-code-inserter/smartgooglecode.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/syntaxhighlighter/syntaxhighlighter.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/wp-database-backup/wp-database-backup.php" -exec grep -H "Version: " {} \;
