@@ -1,5 +1,5 @@
 #!/bin/bash
-#Version 0.7.4
+#Version 0.7.5
 #Oleksii Muzychenko and Andrew Prokofiev
 
 user="$1"
@@ -37,7 +37,7 @@ if [ ! -d "/home/$user/public_html" ]
 					echo -n "Current Old Drupal version are 5.23, 6.38 and: "
                			 	echo "${drupal7}"
 		                	for i in 226 227 228 229 230 231; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
-		                	find -type f -iwholename "*/modules/system/system.info" -exec grep -H "version = \"" {} \;|grep -vi "7.67" -e "5.23" -e "6.38"
+		                	find -type f -iwholename "*/modules/system/system.info" -exec grep -H "version = \"" {} \;|grep -v "7.67"|grep -v "5.23" |grep -v "6.38"
 		                	for i in 226 227 228 229 230 231; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
 	fi
 
@@ -91,7 +91,7 @@ if [ ! -d "/home/$user/public_html" ]
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/email-subscribers/email-subscribers.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/fb-messenger-live-chat/fb-messenger-live-chat.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/give/give.php" -exec grep -H "Version: " {} \;
-			find /home/$user/public_html -iwholename "*/wp-content/plugins/hybrid-composer"
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/hybrid-composer/index.php"  -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/nd-learning"
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/nd-booking"
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/nd-travel/nd-travel.php" -exec grep -H "Version: " {} \;
@@ -101,11 +101,14 @@ if [ ! -d "/home/$user/public_html" ]
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/wp-database-backup/wp-database-backup.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/wp-live-chat-support/wp-live-chat-support.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/yellow-pencil-visual-theme-customizer/yellow-pencil.php" -exec grep -H "Version: " {} \;
-
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/wp-live-chat-support/wp-live-chat-support.php" -exec grep -H "Version: " {} \;
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/wp-maintenance/wp-maintenance.php" -exec grep -H "Version: " {} \;
+			
+			echo -e '\033[0m'
 			echo -e '\033[1m'
                         echo -n "Nulled theme affected with wp_vcd malware. The whole theme should be removed :"
                         echo -e '\033[0m'
-                        echo -e "\033[94m"
+                        echo -e '\033[94m'
 			find /home/$user/public_html -iwholename "*/wp-content/themes" -exec grep -Rl 'wp_vcd' {} \;
 						
 			echo -e "\033[0m"
@@ -121,18 +124,18 @@ if [ ! -d "/home/$user/public_html" ]
 #		Account status
 		if ls /var/cpanel/suspended/ |grep $user >/dev/null 2>&1
 			then
-				echo -e "$user - \e[38;5;9mSUSPENDED\e[0m"
+				echo -e "$user - \e[1;38;5;9mSUSPENDED\e[0m"
 			else
 				domain=`grep " $user"$ /etc/trueuserdomains |cut -d ":" -f1`
 				hname=`less /usr/local/apache/conf/httpd.conf |grep $domain -2 |grep -v 127.0.0.1 |grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' |sort|uniq`
 				if /usr/local/bin/curl -s --resolve "$domain:80:$hname" http://$domain |egrep "403 Forbidden|403 Permission" >/dev/null 2>&1
 					then
-						echo -e "$user - \e[38;5;11mBLOCKED by .htaccess\e[0m"
+						echo -e "$user - \e[1;38;5;11mBLOCKED by .htaccess\e[0m"
 						elif /usr/local/bin/curl -s --resolve "$domain:80:$hname" https://$domain |egrep "403 Forbidden|403 Permission" >/dev/null 2>&1
 					then
-						echo -e "$user - \e[38;5;11mBLOCKED by .htaccess\e[0m"
+						echo -e "$user - \e[1;38;5;11mBLOCKED by .htaccess\e[0m"
 					else
-						echo -e "$user - \e[38;5;10mONLINE\e[0m"
+						echo -e "$user - \e[1;38;5;10mONLINE\e[0m"
 				fi
 		fi
 fi
