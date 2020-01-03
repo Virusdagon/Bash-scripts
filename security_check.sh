@@ -114,6 +114,18 @@ if [ ! -d "/home/$user/public_html" ]
 			echo -e "\033[0m"
 	
 	fi
+
+#		Link checker 
+		
+		        echo -e '\033[1m'               
+                        echo -n "Following links to the root found:"
+                        echo -e '\033[0m'
+                        echo -e "\033[94m"
+			find /home/$user/public_html/ type -l | grep -e root -e passwd
+			
+			echo -e "\033[0m"
+
+		
 		echo -e "\e[1m Real owner: \e[0m"
                 less /etc/trueuserowners |grep $user
 
