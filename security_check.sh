@@ -121,7 +121,7 @@ if [ ! -d "/home/$user/public_html" ]
                         echo -n "Following links to the root found:"
                         echo -e '\033[0m'
                         echo -e "\033[94m"
-			find /home/$user/public_html/ type -l | grep -e root -e passwd
+			find /home/$user/public_html/ -type l | grep -e root -e passwd
 			
 			echo -e "\033[0m"
 
