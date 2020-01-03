@@ -80,11 +80,11 @@ if [ ! -d "/home/$user/public_html" ]
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/duplicate-page"
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/form-lightbox"
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/rich-reviews"
-			find /home/$user/public_html -iwholename "*/wp-content/plugins/yuzo-related-post"
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/slick-popup"
 
 #			Updates available
 			find /home/$user/public_html -iwholename "*/wp-content/themes/bridge"
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/yuzo-related-post/yuzo.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/ad-inserter/ad-inserter.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/blog-designer/blog-designer.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/bold-page-builder/bold-builder.php" -exec grep -H "Version: " {} \;
