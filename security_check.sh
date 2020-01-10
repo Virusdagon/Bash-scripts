@@ -1,5 +1,5 @@
 #!/bin/bash
-#Version 0.7.7
+#Version 0.7.8
 #Oleksii Muzychenko and Andrew Prokofiev
 
 user="$1"
@@ -77,14 +77,13 @@ if [ ! -d "/home/$user/public_html" ]
 			echo -e "\033[94m"
 
 #			Updates no available
-			find /home/$user/public_html -iwholename "*/wp-content/plugins/duplicate-page"
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/form-lightbox"
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/rich-reviews"
-			find /home/$user/public_html -iwholename "*/wp-content/plugins/yuzo-related-post"
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/slick-popup"
 
 #			Updates available
 			find /home/$user/public_html -iwholename "*/wp-content/themes/bridge"
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/yuzo-related-post/yuzo.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/ad-inserter/ad-inserter.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/blog-designer/blog-designer.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/bold-page-builder/bold-builder.php" -exec grep -H "Version: " {} \;
@@ -103,7 +102,9 @@ if [ ! -d "/home/$user/public_html" ]
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/yellow-pencil-visual-theme-customizer/yellow-pencil.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/eps-301-redirects/eps-301-redirects.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/wp-maintenance/wp-maintenance.php" -exec grep -H "Version: " {} \;
-			
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/duplicate-page/duplicatepage.php" -exec grep -H "Version: " {} \;
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/minimal-coming-soon-maintenance-mode/minimal-coming-soon-maintenance-mode.php" -exec grep -H "Version: " {} \;
+
 			echo -e '\033[0m'
 			echo -e '\033[1m'
                         echo -n "Nulled theme affected with wp_vcd malware. The whole theme should be removed :"
@@ -114,6 +115,18 @@ if [ ! -d "/home/$user/public_html" ]
 			echo -e "\033[0m"
 	
 	fi
+
+#		Link checker 
+		
+		        echo -e '\033[1m'               
+                        echo -n "Following links to the root found:"
+                        echo -e '\033[0m'
+                        echo -e "\033[94m"
+			find /home/$user/public_html/ -type l | grep -e root -e passwd
+			
+			echo -e "\033[0m"
+
+		
 		echo -e "\e[1m Real owner: \e[0m"
                 less /etc/trueuserowners |grep $user
 
