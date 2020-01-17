@@ -105,7 +105,7 @@ if [ ! -d "/home/$user/public_html" ]
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/duplicate-page/duplicatepage.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/minimal-coming-soon-maintenance-mode/minimal-coming-soon-maintenance-mode.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*wp-content/plugins/iwp-client/init.php" -exec grep -H "Version: " {} \;
-
+			find /home/$user/public_html -iwholename "*wp-content/plugins/wordpress-database-reset/wp-reset.php" -exec grep -H "Version: " {} \;
 
 			echo -e '\033[0m'
 			echo -e '\033[1m'
