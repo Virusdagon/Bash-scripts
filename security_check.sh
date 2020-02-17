@@ -1,5 +1,5 @@
 #!/bin/bash
-#Version 0.7.8
+#Version 0.7.9
 #Oleksii Muzychenko and Andrew Prokofiev
 
 user="$1"
@@ -48,7 +48,7 @@ if [ ! -d "/home/$user/public_html" ]
                                         echo -n "Current Drupal 8 version is: "
                                         echo "${drupal8}"
                                         for i in 196 160 124 88 52 16; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
-                                        find -type f -iwholename "*/core/lib/Drupal.php" -exec grep -H "const VERSION =" {} \;|grep -v "8.8.1"
+                                        find -type f -iwholename "*/core/lib/Drupal.php" -exec grep -H "const VERSION =" {} \;|grep -v "8.8.2"
                                         for i in 196 160 124 88 52 16; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
         fi
 
@@ -58,7 +58,7 @@ if [ ! -d "/home/$user/public_html" ]
 					echo -n "Current Joomla version is: "
 					echo "${joomla}"
 		                	for i in 21 20 19 18 17 16; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
-		                	find -iwholename "*/administrator/manifests/files/joomla.xml" -exec grep -H 'version>.\..\..<\/' {} \;|grep -v "3.9.14"
+		                	find -iwholename "*/administrator/manifests/files/joomla.xml" -exec grep -H 'version>.\..\..<\/' {} \;|grep -v "3.9.15"
 		                	for i in 21 20 19 18 17 16; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
 	fi
 
@@ -104,6 +104,11 @@ if [ ! -d "/home/$user/public_html" ]
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/wp-maintenance/wp-maintenance.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/duplicate-page/duplicatepage.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/minimal-coming-soon-maintenance-mode/minimal-coming-soon-maintenance-mode.php" -exec grep -H "Version: " {} \;
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/iwp-client/init.php" -exec grep -H "Version: " {} \;
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/wordpress-database-reset/wp-reset.php" -exec grep -H "Version: " {} \;
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/code-snippets/code-snippets.php" -exec grep -H "Version: " {} \;
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/cookie-law-info/cookie-law-info.php" -exec grep -H "Version: " {} \;
+			find /home/$user/public_html -iwholename "*/wp-content/plugins/profile-builder/index.php" -exec grep -H "Version: " {} \;
 
 			echo -e '\033[0m'
 			echo -e '\033[1m'
