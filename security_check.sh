@@ -109,6 +109,7 @@ if [ ! -d "/home/$user/public_html" ]
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/code-snippets/code-snippets.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/cookie-law-info/cookie-law-info.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/profile-builder/index.php" -exec grep -H "Version: " {} \;
+			find /home/$user/public_html/ -iwholename "*/wp-content/plugins/wp-central/wpcentral.php" -exec grep -H "Version: " {} \;
 
 			echo -e '\033[0m'
 			echo -e '\033[1m'
