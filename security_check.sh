@@ -110,7 +110,8 @@ if [ ! -d "/home/$user/public_html" ]
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/cookie-law-info/cookie-law-info.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/profile-builder/index.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html/ -iwholename "*/wp-content/plugins/wp-central/wpcentral.php" -exec grep -H "Version: " {} \;
-
+			find /home/$user/public_html -iwholename "*wp-content/plugins/themegrill-demo-importer/themegrill-demo-importer.php" -exec grep -H "Version: " {} \;
+			
 			echo -e '\033[0m'
 			echo -e '\033[1m'
                         echo -n "Nulled theme affected with wp_vcd malware. The whole theme should be removed :"
@@ -131,6 +132,14 @@ if [ ! -d "/home/$user/public_html" ]
 			find /home/$user/public_html/ -type l | grep -e root -e passwd
 			
 			echo -e "\033[0m"
+#backup locker
+		        echo -e '\033[1m'               
+                        echo -n "Lock backup:"
+                        echo -e '\033[0m'
+                        echo -e "\033[94m"
+
+	jetapi backup -F lockLatestSnap -D "account=$user&depth=3&ttl=20"
+
 
 		
 		echo -e "\e[1m Real owner: \e[0m"
