@@ -111,7 +111,8 @@ if [ ! -d "/home/$user/public_html" ]
 			find /home/$user/public_html -iwholename "*/wp-content/plugins/profile-builder/index.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html/ -iwholename "*/wp-content/plugins/wp-central/wpcentral.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*wp-content/plugins/themegrill-demo-importer/themegrill-demo-importer.php" -exec grep -H "Version: " {} \;
-			
+			find /home/$user/public_html -iwholename "*wp-content/plugins/async-javascript/async-javascript.php" -exec grep -H "Version: " {} \;			
+
 			echo -e '\033[0m'
 			echo -e '\033[1m'
                         echo -n "Nulled theme affected with wp_vcd malware. The whole theme should be removed :"
