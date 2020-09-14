@@ -37,7 +37,7 @@ if [ ! -d "/home/$user/public_html" ]
 					echo -n "Current Old Drupal version are 5.23, 6.38 and: "
                			 	echo "${drupal7}"
 		                	for i in 226 227 228 229 230 231; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
-		                	find -type f -iwholename "*/modules/system/system.info" -exec grep -H "version = \"" {} \;|grep -v "7.69"|grep -v "5.23" |grep -v "6.38"
+		                	find -type f -iwholename "*/modules/system/system.info" -exec grep -H "version = \"" {} \;|grep -v "${drupal7}" |grep -v "5.23" |grep -v "6.38"
 		                	for i in 226 227 228 229 230 231; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
 	fi
 
@@ -48,7 +48,7 @@ if [ ! -d "/home/$user/public_html" ]
                                         echo -n "Current Drupal 8 version is: "
                                         echo "${drupal8}"
                                         for i in 196 160 124 88 52 16; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
-                                        find -type f -iwholename "*/core/lib/Drupal.php" -exec grep -H "const VERSION =" {} \;|grep -v "8.8.2"
+                                        find -type f -iwholename "*/core/lib/Drupal.php" -exec grep -H "const VERSION =" {} \;|grep -v "${drupal8}"
                                         for i in 196 160 124 88 52 16; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
         fi
 
@@ -58,7 +58,7 @@ if [ ! -d "/home/$user/public_html" ]
 					echo -n "Current Joomla version is: "
 					echo "${joomla}"
 		                	for i in 21 20 19 18 17 16; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
-		                	find -iwholename "*/administrator/manifests/files/joomla.xml" -exec grep -H 'version>.\..\..<\/' {} \;|grep -v "3.9.15"
+		                	find -iwholename "*/administrator/manifests/files/joomla.xml" -exec grep -H 'version>.\..\..<\/' {} \;|grep -v "${joomla}"
 		                	for i in 21 20 19 18 17 16; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
 	fi
 
@@ -68,7 +68,7 @@ if [ ! -d "/home/$user/public_html" ]
 					echo -n "Current WordPress version is: "
 					echo "${wordpress}"
 		                	for i in 52 53 54 55 56 57; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
-		                	find . -type f -iwholename "*/wp-includes/version.php" -exec grep -H "\$wp_version =" {} \;|grep -v "5.3.2"
+		                	find . -type f -iwholename "*/wp-includes/version.php" -exec grep -H "\$wp_version =" {} \;|grep -v "${wordpress}"
 		                	for i in 52 53 54 55 56 57; do echo -en "\e[38;5;${i}m=================\e[0m"; done; echo
 
                         echo -e '\033[1m'		
@@ -115,8 +115,9 @@ if [ ! -d "/home/$user/public_html" ]
 			find /home/$user/public_html -iwholename "*wp-content/plugins/flexible-checkout-fields/flexible-checkout-fields.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*wp-content/plugins/modern-events-calendar-lite/modern-events-calendar-lite.php" -exec grep -H "Version: " {} \;
 			find /home/$user/public_html -iwholename "*wp-content/plugins/wd-google-maps/wd-google-maps.php" -exec grep -H "Version: " {} \;
-
-			echo -e '\033[0m'
+                        find /home/$user/public_html -iwholename "*wp-content/plugins/wp-file-manager/file_folder_manager.php" -exec grep -H "Version: " {} \;		
+	
+                        echo -e '\033[0m'
 			echo -e '\033[1m'
                         echo -n "Nulled theme affected with wp_vcd malware. The whole theme should be removed :"
                         echo -e '\033[0m'
@@ -171,3 +172,4 @@ if [ ! -d "/home/$user/public_html" ]
 				fi
 		fi
 fi
+
