@@ -155,21 +155,7 @@ if [ ! -d "/home/$user/public_html" ]
 
 		echo -e '\e[1m Account status: \e[0m'
 #		Account status
-		if ls /var/cpanel/suspended/ |grep $user >/dev/null 2>&1
-			then
-				echo -e "$user - \e[1;38;5;9mSUSPENDED\e[0m"
-			else
-				domain=`grep " $user"$ /etc/trueuserdomains |cut -d ":" -f1`
-				hname=`less /usr/local/apache/conf/httpd.conf |grep $domain -2 |grep -v 127.0.0.1 |grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' |sort|uniq`
-				if /usr/local/bin/curl -s --resolve "$domain:80:$hname" http://$domain |egrep "403 Forbidden|403 Permission" >/dev/null 2>&1
-					then
-						echo -e "$user - \e[1;38;5;11mBLOCKED by .htaccess\e[0m"
-						elif /usr/local/bin/curl -s --resolve "$domain:80:$hname" https://$domain |egrep "403 Forbidden|403 Permission" >/dev/null 2>&1
-					then
-						echo -e "$user - \e[1;38;5;11mBLOCKED by .htaccess\e[0m"
-					else
-						echo -e "$user - \e[1;38;5;10mONLINE\e[0m"
-				fi
-		fi
+		
+		. /scripts/accstatus $user
 fi
 
